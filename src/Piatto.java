@@ -84,10 +84,6 @@ public class Piatto {
 
 
 }
-
-
-import java.util.*;
-
 public class MisterCuoco {
     private List<Partecipante> partecipanti;
     private List<Chef> giudici;
@@ -174,7 +170,7 @@ public class MisterCuoco {
     }
 }
 
-class Part
+
 
 
 

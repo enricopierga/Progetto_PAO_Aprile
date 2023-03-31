@@ -53,3 +53,40 @@ public class Piatto {
         this.tipologia = tipologia;
     }
 }
+
+    public int getBonus(enum <Caratteristica> caratteristiche) {
+        int bonus = aspetto + gusto + consistenza;
+
+        // Calcolo dei bonus aggiuntivi in base alle caratteristiche dello chef giudice
+        for (Caratteristica c : caratteristiche) {
+            switch (c) {
+                case GOL:
+                    if (tipologia.equals("dolce") || tipologia.equals("carne")) {
+                        bonus += aspetto + gusto + consistenza;
+                    }
+                    break;
+                case RIC:
+                    if ((portata.equals("antipasto") || portata.equals("secondo")) &&
+                            (tipologia.equals("vegetariano") || tipologia.equals("pesce"))) {
+                        bonus += aspetto + gusto + consistenza;
+                    }
+                    break;
+                case EST:
+                    if (portata.equals("antipasto")) {
+                        bonus += aspetto + gusto + consistenza;
+                    }
+                    break;
+            }
+        }
+
+        return bonus;
+    }
+
+
+}
+
+
+
+
+
+

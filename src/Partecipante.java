@@ -25,7 +25,7 @@ public class Partecipante {
     }
 }
 
-import java.util.*;
+
 
 public class MisterCuoco {
     public static void main(String[] args) {

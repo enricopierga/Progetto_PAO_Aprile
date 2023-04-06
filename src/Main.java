@@ -10,7 +10,7 @@ public class Main {
         int L = scanner.nextInt();
         scanner.nextLine();
 
-        List<Chef> chefs = new ArrayList<>();
+        /*List<Chef> chefs = new ArrayList<>();
         for (int i = 0; i < N; i++) {
             String[] chefData = scanner.nextLine().split(" ");
             chefs.add(new Chef(chefData[0], Integer.parseInt(chefData[1]), Integer.parseInt(chefData[2]), Integer.parseInt(chefData[3])));
@@ -30,8 +30,9 @@ public class Main {
 
         // Implementa qui la logica dell'algoritmo
     }
-}
+}*/
 
+/*
 class Chef {
     String id;
     int goloso;
@@ -78,4 +79,4 @@ class Partecipante {
         this.piatti = piatti;
         this.chefId = chefId;
     }
-}
+}*/

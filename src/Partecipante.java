@@ -1,11 +1,19 @@
+import java.util.List;
 
 public class Partecipante {
     private int tecnica;
     private int creativita;
 
-    public Partecipante(int tecnica, int creativita) {
+    private final String idPartecipante;
+    private final String idChef;
+    private List<String> listaPiatti;
+
+    public Partecipante(int tecnica, int creativita, String idPartecipante, String idChef, List<String> listaPiatti) {
         this.tecnica = tecnica;
         this.creativita = creativita;
+        this.idPartecipante = idPartecipante;
+        this.idChef = idChef;
+        this.listaPiatti = listaPiatti;
     }
 
     public int getTecnica() {
@@ -23,11 +31,35 @@ public class Partecipante {
     public void setCreativita(int creativita) {
         this.creativita = creativita;
     }
+
+    public String getIdPartecipante() {
+        return idPartecipante;
+    }
+
+
+
+    public String getIdChef() {
+        return idChef;
+    }
+    public List<String> getListaPiatti() {
+        return listaPiatti;
+    }
+
+    public void setListaPiatti(List<String> listaPiatti) {
+        this.listaPiatti = listaPiatti;
+    }
+    public void aggPiatto(String nuovoPiatto){
+        this.listaPiatti.add(nuovoPiatto);
+    }
 }
 
 
 
-public class MisterCuoco {
+
+
+
+
+/*public class MisterCuoco {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
@@ -102,12 +134,5 @@ public class MisterCuoco {
         // Ritorno del vincitore
         return participants[0];
     }
-}
+}*/
 
-class Chef {
-    private String name;
-    private boolean goloso;
-    private boolean ricercato;
-    private boolean esteta;
-
-    public Chef(String name, boolean goloso, boolean ricercato, boolean esteta) {

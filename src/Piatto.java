@@ -2,15 +2,18 @@ public class Piatto {
     private int aspetto;
     private int gusto;
     private int consistenza;
+
+    private final String idPiatto;
     private String portata;
     private String tipologia;
 
-    public Piatto(int aspetto, int gusto, int consistenza, String portata, String tipologia) {
+    public Piatto(int aspetto, int gusto, int consistenza, String portata, String tipologia, String idPiatto) {
         this.aspetto = aspetto;
         this.gusto = gusto;
         this.consistenza = consistenza;
         this.portata = portata;
         this.tipologia = tipologia;
+        this.idPiatto = idPiatto;
     }
 
     public int getAspetto() {
@@ -52,38 +55,47 @@ public class Piatto {
     public void setTipologia(String tipologia) {
         this.tipologia = tipologia;
     }
-}
 
-    public int getBonus(enum <Caratteristica> caratteristiche) {
-        int bonus = aspetto + gusto + consistenza;
 
-        // Calcolo dei bonus aggiuntivi in base alle caratteristiche dello chef giudice
-        for (Caratteristica c : caratteristiche) {
-            switch (c) {
-                case GOL:
-                    if (tipologia.equals("dolce") || tipologia.equals("carne")) {
-                        bonus += aspetto + gusto + consistenza;
-                    }
-                    break;
-                case RIC:
-                    if ((portata.equals("antipasto") || portata.equals("secondo")) &&
-                            (tipologia.equals("vegetariano") || tipologia.equals("pesce"))) {
-                        bonus += aspetto + gusto + consistenza;
-                    }
-                    break;
-                case EST:
-                    if (portata.equals("antipasto")) {
-                        bonus += aspetto + gusto + consistenza;
-                    }
-                    break;
-            }
-        }
-
-        return bonus;
+    public String getIdPiatto() {
+        return idPiatto;
     }
 
-
 }
+
+
+
+
+//    public int getBonus(enum <Caratteristica> caratteristiche) {
+//        int bonus = aspetto + gusto + consistenza;
+//
+//        // Calcolo dei bonus aggiuntivi in base alle caratteristiche dello chef giudice
+//        for (Caratteristica c : caratteristiche) {
+//            switch (c) {
+//                case GOL:
+//                    if (tipologia.equals("dolce") || tipologia.equals("carne")) {
+//                        bonus += aspetto + gusto + consistenza;
+//                    }
+//                    break;
+//                case RIC:
+//                    if ((portata.equals("antipasto") || portata.equals("secondo")) &&
+//                            (tipologia.equals("vegetariano") || tipologia.equals("pesce"))) {
+//                        bonus += aspetto + gusto + consistenza;
+//                    }
+//                    break;
+//                case EST:
+//                    if (portata.equals("antipasto")) {
+//                        bonus += aspetto + gusto + consistenza;
+//                    }
+//                    break;
+//            }
+//        }
+//
+//        return bonus;
+//    }
+
+
+
 public class MisterCuoco {
     private List<Partecipante> partecipanti;
     private List<Chef> giudici;

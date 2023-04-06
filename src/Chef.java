@@ -1,41 +1,37 @@
-enum Caratteristica {
-    GOLOSO, RICERCATO, ESTETA
-}
-
 public class Chef {
-    private boolean flgGoloso;
-    private boolean flgEsteta;
-    private boolean flgRicercato;
+    private Integer flgGoloso;
+    private Integer flgEsteta;
+    private Integer flgRicercato;
 
     private String idChef;
 
-    public Chef(boolean flgEsteta, boolean flgGoloso, boolean flgRicercato, String idChef) {
+    public Chef(String idChef, Integer flgGoloso, Integer flgEsteta, Integer flgRicercato) {
         this.flgEsteta = flgEsteta;
         this.flgGoloso = flgGoloso;
         this.flgRicercato = flgRicercato;
         this.idChef = idChef;
     }
 
-    public boolean isFlgEsteta() {
+    public Integer isFlgEsteta() {
         return flgEsteta;
     }
-    public void setFlgEsteta(boolean flgEsteta) {
+    public void setFlgEsteta(Integer flgEsteta) {
         this.flgEsteta = flgEsteta;
     }
 
-    public boolean isFlgGoloso() {
+    public Integer isFlgGoloso() {
         return flgGoloso;
     }
 
-    public void setFlgGoloso(boolean flgGoloso) {
+    public void setFlgGoloso(Integer flgGoloso) {
         this.flgGoloso = flgGoloso;
     }
 
-    public boolean isFlgRicercato() {
+    public Integer isFlgRicercato() {
         return flgRicercato;
     }
 
-    public void setFlgRicercato(boolean flgRicercato) {
+    public void setFlgRicercato(Integer flgRicercato) {
         this.flgRicercato = flgRicercato;
     }
 

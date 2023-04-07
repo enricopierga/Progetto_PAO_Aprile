@@ -1,82 +1,96 @@
 import java.util.*;
-import java.io.*;
 
 public class Main {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        System.out.println("Si parte!!!");
 
-        int N = scanner.nextInt();
-        int M = scanner.nextInt();
-        int L = scanner.nextInt();
-        scanner.nextLine();
+        Scanner sc = new Scanner(System.in);
 
-        /*List<Chef> chefs = new ArrayList<>();
-        for (int i = 0; i < N; i++) {
-            String[] chefData = scanner.nextLine().split(" ");
-            chefs.add(new Chef(chefData[0], Integer.parseInt(chefData[1]), Integer.parseInt(chefData[2]), Integer.parseInt(chefData[3])));
+        // Leggi il numero di chef, piatti e partecipanti
+        int numeroDiChef = sc.nextInt();
+        System.out.printf("Ci sono %s chef.%n", numeroDiChef);
+
+        int numeroDiPiatti = sc.nextInt();
+        System.out.printf("Ci sono %s piatti.%n", numeroDiPiatti);
+
+        int numeroDiPartecipanti = sc.nextInt();
+        System.out.printf("Ci sono %s partecipanti.%n", numeroDiPartecipanti);
+
+        sc.nextLine(); // consuma la fine linea
+
+        // Crea la lista di chef
+        List<Chef> chefList = new ArrayList<>();
+        for (int i = 0; i < numeroDiChef; i++) {
+            String[] chefData = sc.nextLine().split(" ");
+            Chef chef = new Chef(chefData[0], Integer.parseInt(chefData[1]), Integer.parseInt(chefData[2]), Integer.parseInt(chefData[3]));
+            chefList.add(chef);
         }
 
-        List<Piatto> piatti = new ArrayList<>();
-        for (int i = 0; i < M; i++) {
-            String[] piattoData = scanner.nextLine().split(" ");
-            piatti.add(new Piatto(piattoData[0], Integer.parseInt(piattoData[1]), Integer.parseInt(piattoData[2]), Integer.parseInt(piattoData[3]), piattoData[4], piattoData[5]));
+        // Crea la lista di piatti
+        List<Piatto> piattoList = new ArrayList<>();
+        for (int i = 0; i < numeroDiPiatti; i++) {
+            String[] piattoData = sc.nextLine().split(" ");
+            Piatto piatto = new Piatto(piattoData[0]);
+            piatto.setAspetto(Integer.parseInt(piattoData[1]));
+            piatto.setConsistenza(Integer.parseInt(piattoData[2]));
+            piatto.setGusto(Integer.parseInt(piattoData[3]));
+            piatto.setPortata(Portata.valueOf(piattoData[4].toUpperCase()));
+            piatto.setTipologia(Tipologia.valueOf(piattoData[5].toUpperCase()));
+            piattoList.add(piatto);
         }
 
-        List<Partecipante> partecipanti = new ArrayList<>();
-        for (int i = 0; i < L; i++) {
-            String[] partecipanteData = scanner.nextLine().split(" ");
-            partecipanti.add(new Partecipante(partecipanteData[0], Integer.parseInt(partecipanteData[1]), Integer.parseInt(partecipanteData[2]), partecipanteData[3], partecipanteData[4]));
+        // Crea la lista di partecipanti
+        List<Partecipante> partecipanteList = new ArrayList<>();
+        for (int i = 0; i < numeroDiPartecipanti; i++) {
+            String[] partecipanteData = sc.nextLine().split(" ");
+            Partecipante partecipante = new Partecipante(partecipanteData[0]);
+            partecipante.setTecnica(Integer.parseInt(partecipanteData[1]));
+            partecipante.setCreativita(Integer.parseInt(partecipanteData[2]));
+
+            String[] piattiPresentati = partecipanteData[3].split(",");
+            for (String idPiatto : piattiPresentati) {
+                for (Piatto piatto : piattoList) {
+                    if (piatto.getId().equals(idPiatto)) {
+                        partecipante.addPiatto(piatto);
+                        break;
+                    }
+                }
+            }
+
+            String idChef = partecipanteData[4];
+            for (Chef chef : chefList) {
+                if (chef.getId().equals(idChef)) {
+                    partecipante.setChef(chef);
+                    break;
+                }
+            }
+
+            partecipanteList.add(partecipante);
         }
 
-        // Implementa qui la logica dell'algoritmo
-    }
-}*/
+        // Output di verifica
+        System.out.println("Chef:");
+        for (Chef chef : chefList) {
+            System.out.println(chef.getId() + " " + chef.isGoloso() + " " + chef.isEsteta() + " " + chef.isRicercato());
+        }
 
-/*
-class Chef {
-    String id;
-    int goloso;
-    int esteta;
-    int ricercato;
+        System.out.println("Piatti:");
+        for (Piatto piatto : piattoList) {
+            System.out.println(piatto.getId() + " " + piatto.getAspetto() + " " + piatto.getConsistenza() + " " + piatto.getGusto() + " " + piatto.getPortata() + " " + piatto.getTipologia());
+            for (Partecipante partecipante : piatto.getPartecipanti()) {
+                System.out.print(partecipante.getId() + " ");
+            }
+            System.out.println();
+        }
 
-    public Chef(String id, int goloso, int esteta, int ricercato) {
-        this.id = id;
-        this.goloso = goloso;
-        this.esteta = esteta;
-        this.ricercato = ricercato;
+        System.out.println("Partecipanti:");
+        for (Partecipante partecipante : partecipanteList) {
+            System.out.print(partecipante.getId() + " " + partecipante.getTecnica() + " " + partecipante.getCreativita() + " ");
+            for (Piatto piatto : partecipante.getPiattiPresentati()) {
+                System.out.print(piatto.getId() + ",");
+            }
+            System.out.println(" " + partecipante.getChef().getId());
+        }
     }
 }
 
-class Piatto {
-    String id;
-    int aspetto;
-    int consistenza;
-    int gusto;
-    String portata;
-    String tipologia;
-
-    public Piatto(String id, int aspetto, int consistenza, int gusto, String portata, String tipologia) {
-        this.id = id;
-        this.aspetto = aspetto;
-        this.consistenza = consistenza;
-        this.gusto = gusto;
-        this.portata = portata;
-        this.tipologia = tipologia;
-    }
-}
-
-class Partecipante {
-    String id;
-    int tecnica;
-    int creativita;
-    String piatti;
-    String chefId;
-
-    public Partecipante(String id, int tecnica, int creativita, String piatti, String chefId) {
-        this.id = id;
-        this.tecnica = tecnica;
-        this.creativita = creativita;
-        this.piatti = piatti;
-        this.chefId = chefId;
-    }
-}*/

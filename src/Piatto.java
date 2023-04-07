@@ -1,189 +1,167 @@
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Rappresenta un piatto presentato durante l'edizione del concorso.
+ */
 public class Piatto {
+    private String id;
     private int aspetto;
-    private int gusto;
     private int consistenza;
+    private int gusto;
+    private Portata portata;
+    private Tipologia tipologia;
+    private List<Partecipante> partecipanti;
 
-    private final String idPiatto;
-    private String portata;
-    private String tipologia;
-
-    public Piatto(int aspetto, int gusto, int consistenza, String portata, String tipologia, String idPiatto) {
-        this.aspetto = aspetto;
-        this.gusto = gusto;
-        this.consistenza = consistenza;
-        this.portata = portata;
-        this.tipologia = tipologia;
-        this.idPiatto = idPiatto;
+    /**
+     * Costruttore che crea un nuovo Piatto con l'ID specificato.
+     *
+     * @param id l'ID del Piatto
+     */
+    public Piatto(String id) {
+        this.id = id;
+        this.partecipanti = new ArrayList<>();
     }
 
+    /**
+     * Restituisce l'ID del Piatto.
+     *
+     * @return l'ID del Piatto
+     */
+    public String getId() {
+        return id;
+    }
+
+    /**
+     * Imposta l'ID del Piatto.
+     *
+     * @param id il nuovo ID del Piatto
+     */
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    /**
+     * Restituisce la valutazione in termini di aspetto del Piatto.
+     *
+     * @return la valutazione in termini di aspetto del Piatto
+     */
     public int getAspetto() {
         return aspetto;
     }
 
+    /**
+     * Imposta la valutazione in termini di aspetto del Piatto.
+     *
+     * @param aspetto la nuova valutazione in termini di aspetto del Piatto
+     */
     public void setAspetto(int aspetto) {
         this.aspetto = aspetto;
     }
 
-    public int getGusto() {
-        return gusto;
-    }
-
-    public void setGusto(int gusto) {
-        this.gusto = gusto;
-    }
-
+    /**
+     * Restituisce la valutazione in termini di consistenza del Piatto.
+     *
+     * @return la valutazione in termini di consistenza del Piatto
+     */
     public int getConsistenza() {
         return consistenza;
     }
 
+    /**
+     * Imposta la valutazione in termini di consistenza del Piatto.
+     *
+     * @param consistenza la nuova valutazione in termini di consistenza del Piatto
+     */
     public void setConsistenza(int consistenza) {
         this.consistenza = consistenza;
     }
 
-    public String getPortata() {
+    /**
+     * Restituisce la valutazione in termini di gusto del Piatto.
+     *
+     * @return la valutazione in termini di gusto del Piatto
+     */
+    public int getGusto() {
+        return gusto;
+    }
+
+    /**
+     * Imposta la valutazione in termini di gusto del Piatto.
+     *
+     * @param gusto la nuova valutazione in termini di gusto del Piatto
+     */
+    public void setGusto(int gusto) {
+        this.gusto = gusto;
+    }
+
+    /**
+     * Restituisce la portata del Piatto.
+     *
+     * @return la portata del Piatto
+     */
+    public Portata getPortata() {
         return portata;
     }
 
-    public void setPortata(String portata) {
+    /**
+     * Imposta la portata del Piatto.
+     *
+     * @param portata la nuova portata del Piatto
+     */
+    public void setPortata(Portata portata) {
         this.portata = portata;
     }
 
-    public String getTipologia() {
+    /**
+     * Restituisce la tipologia
+     * del Piatto.
+     *
+     * @return la tipologia del Piatto
+     */
+    public Tipologia getTipologia() {
         return tipologia;
     }
 
-    public void setTipologia(String tipologia) {
+    /**
+     * Imposta la tipologia del Piatto.
+     *
+     * @param tipologia la nuova tipologia del Piatto
+     */
+    public void setTipologia(Tipologia tipologia) {
         this.tipologia = tipologia;
     }
 
-
-    public String getIdPiatto() {
-        return idPiatto;
+    /**
+     * Restituisce la lista di partecipanti che hanno presentato il Piatto.
+     *
+     * @return la lista di partecipanti che hanno presentato il Piatto
+     */
+    public List<Partecipante> getPartecipanti() {
+        return partecipanti;
     }
 
-}
-
-
-
-
-//    public int getBonus(enum <Caratteristica> caratteristiche) {
-//        int bonus = aspetto + gusto + consistenza;
-//
-//        // Calcolo dei bonus aggiuntivi in base alle caratteristiche dello chef giudice
-//        for (Caratteristica c : caratteristiche) {
-//            switch (c) {
-//                case GOL:
-//                    if (tipologia.equals("dolce") || tipologia.equals("carne")) {
-//                        bonus += aspetto + gusto + consistenza;
-//                    }
-//                    break;
-//                case RIC:
-//                    if ((portata.equals("antipasto") || portata.equals("secondo")) &&
-//                            (tipologia.equals("vegetariano") || tipologia.equals("pesce"))) {
-//                        bonus += aspetto + gusto + consistenza;
-//                    }
-//                    break;
-//                case EST:
-//                    if (portata.equals("antipasto")) {
-//                        bonus += aspetto + gusto + consistenza;
-//                    }
-//                    break;
-//            }
-//        }
-//
-//        return bonus;
-//    }
-
-
-
-public class MisterCuoco {
-    private List<Partecipante> partecipanti;
-    private List<Chef> giudici;
-    private List<Piatto> piatti;
-
-    public MisterCuoco(List<Partecipante> partecipanti, List<Chef> giudici, List<Piatto> piatti) {
-        this.partecipanti = partecipanti;
-        this.giudici = giudici;
-        this.piatti = piatti;
-    }
-
-    public void calcolaBonus() {
-        for (Piatto piatto : piatti) {
-            int bonus = 0;
-            for (Chef chef : giudici) {
-                if (chef.puòValutare(piatto)) {
-                    bonus += chef.calcolaBonus(piatto);
-                }
-            }
-            piatto.setBonus(bonus);
+    /**
+     * Aggiunge un partecipante alla lista di partecipanti che hanno presentato il Piatto.
+     *
+     * @param partecipante il partecipante da aggiungere
+     */
+    public void addPartecipante(Partecipante partecipante) {
+        if (!partecipanti.contains(partecipante)) {
+            partecipanti.add(partecipante);
+            partecipante.addPiatto(this);
         }
     }
 
-    public boolean verificaCondizioni(int p, int q) {
-        // Condizione 1
-        int piattiConMediaMinoreDiP = 0;
-        for (Piatto piatto : piatti) {
-            int media = (piatto.getAspetto() + piatto.getConsistenza() + piatto.getGusto()) / 3;
-            if (media < p) {
-                piattiConMediaMinoreDiP++;
-            }
+    /**
+     * Rimuove un partecipante dalla lista di partecipanti che hanno presentato il Piatto.
+     *
+     * @param partecipante il partecipante da rimuovere
+     */
+    public void removePartecipante(Partecipante partecipante) {
+        if (partecipanti.contains(partecipante)) {
+            partecipanti.remove(partecipante);
+            partecipante.removePiatto(this);
         }
-        if (piattiConMediaMinoreDiP > q) {
-            return false;
-        }
-
-        // Condizione 2
-        for (Partecipante partecipante : partecipanti) {
-            int tecnica = partecipante.getTecnica();
-            int creatività = partecipante.getCreatività();
-            if (tecnica < p && creatività < p) {
-                return false;
-            }
-            if (tecnica < p) {
-                partecipante.incrementaCreatività(q / 2);
-            }
-            if (creatività < p) {
-                partecipante.incrementaTecnica(q / 2);
-            }
-        }
-
-        // Condizione 3
-        Map<Piatto, Integer> conteggioPartecipantiPerPiatto = new HashMap<>();
-        for (Piatto piatto : piatti) {
-            conteggioPartecipantiPerPiatto.put(piatto, 0);
-        }
-        for (Partecipante partecipante : partecipanti) {
-            Set<Piatto> piattiDelPartecipante = partecipante.getPiatti();
-            for (Piatto piatto : piattiDelPartecipante) {
-                int conteggio = conteggioPartecipantiPerPiatto.get(piatto);
-                if (conteggio >= 2) {
-                    return false;
-                }
-                conteggioPartecipantiPerPiatto.put(piatto, conteggio + 1);
-            }
-        }
-
-        // Condizione 4
-        for (Partecipante partecipante : partecipanti) {
-            boolean haBonus = false;
-            Set<Piatto> piattiDelPartecipante = partecipante.getPiatti();
-            for (Piatto piatto : piattiDelPartecipante) {
-                if (piatto.getBonus() > 0) {
-                    haBonus = true;
-                    break;
-                }
-            }
-            if (!haBonus) {
-                return false;
-            }
-        }
-
-        return true;
     }
 }
-
-
-
-
-
-

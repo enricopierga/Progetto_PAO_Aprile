@@ -8,7 +8,7 @@ public class Main {
 
         // Leggi il numero di chef, piatti e partecipanti
         int numeroDiChef = sc.nextInt();
-        System.out.printf("Ci sono %s chef.%n", numeroDiChef);
+        System.out.printf("%nCi sono %s chef.%n", numeroDiChef);
 
         int numeroDiPiatti = sc.nextInt();
         System.out.printf("Ci sono %s piatti.%n", numeroDiPiatti);
@@ -41,11 +41,16 @@ public class Main {
 
         // Crea la lista di partecipanti
         List<Partecipante> partecipanteList = new ArrayList<>();
+
         for (int i = 0; i < numeroDiPartecipanti; i++) {
             String[] partecipanteData = sc.nextLine().split(" ");
             Partecipante partecipante = new Partecipante(partecipanteData[0]);
             partecipante.setTecnica(Integer.parseInt(partecipanteData[1]));
+
             partecipante.setCreativita(Integer.parseInt(partecipanteData[2]));
+
+
+
 
             String[] piattiPresentati = partecipanteData[3].split(",");
             for (String idPiatto : piattiPresentati) {
@@ -67,6 +72,7 @@ public class Main {
 
             partecipanteList.add(partecipante);
         }
+
 
         // Output di verifica
         System.out.println("Chef:");
@@ -91,6 +97,249 @@ public class Main {
             }
             System.out.println(" " + partecipante.getChef().getId());
         }
+
+
+
+
+
+
+
+
+
+
+
+        //T1.2 trovare id partecipante con livello di ingresso minore
+
+        String idpartecipminore = new String();
+        int min_punteggio = 999
+        for (Partecipante partecipante : partecipanteList) {
+
+            int punteggio = partecipante.getTecnica() + partecipante.getCreativita();
+            if(punteggio < min_punteggio){
+                idpartecipminore = partecipante.getId();
+                min_punteggio = punteggio;
+                }
+        }
+        System.out.println(" " + idpartecipminore);
+
+
+
+
+
+
+        //T1.3 Caratteristica più frequente per gli chef
+            int nEsteta = 0, nGoloso = 0, nRicercato = 0;
+            for (Chef chef : chefList) {
+                if (chef.isEsteta())
+                    nEsteta++;
+                else if (chef.isGoloso()) {
+                    nGoloso++;
+
+                } else if (chef.isRicercato()) {
+                    nRicercato++;
+                }
+            }
+
+            if (nEsteta > nRicercato && nEsteta > nGoloso) {
+                System.out.println("ESTETA");
+            } else if (nRicercato > nEsteta && nRicercato > nGoloso) {
+                System.out.println("RICERCATO");
+            } else System.out.println("GOLOSO");
+
+
+
+
+        //T1.4 Numero di Piatti Golosi
+        int nPiattiGolosi = 0;
+        for (Piatto piatto :  piattoList) {
+            if (piatto.getPortata().equals(Portata.DOLCE) || piatto.getTipologia().equals(Tipologia.CARNE) || piatto.getTipologia().equals(Tipologia.PESCE)){
+               nPiattiGolosi++;
+            }
+        }
+        System.out.print(nPiattiGolosi);
+
+
+
+        //T1.5 Numero totale di Bonus
+        // Calcolo dei bonus aggiuntivi in base alle caratteristiche dello chef giudice
+
+        //MANCA RELAZIONE TRA CHEF ASSEGNATI AI PARTECIPANTI
+        int nTotaleBonus;
+        nTotaleBonus = 0;
+        for (Partecipante partecipante : partecipanteList ){
+            List<Piatto> piattiPresentati = partecipante.getPiattiPresentati();
+            for (Piatto piatto : piattiPresentati ) {
+               if ((piatto.getPortata().equals("DOLCE") || piatto.getTipologia().equals("CARNE") || piatto.getTipologia().equals("PESCE")) && partecipante.getChef().isGoloso()  ){
+                   nTotaleBonus++;
+                }
+                if (((piatto.getPortata().equals("SECONDO")  && piatto.getTipologia().equals("VEGETARIANO") || piatto.getTipologia().equals("PESCE")) && piatto.getChefricercato ){
+                    nTotaleBonus++;
+                }
+                if (((piatto.getPortata().equals("ANTIPASTO")  && piatto.getTipologia().equals("VEGETARIANO") || piatto.getTipologia().equals("PESCE")) && piatto.getChefricercato ){
+                    nTotaleBonus++;
+                }
+                if (piatto.getPortata().equals("ANTIPASTO")  && piatto.getChefesteta ){
+                    nTotaleBonus++;
+                }
+            }
+        }
+            System.out.println(nTotaleBonus);
+            }
+
+
+
+        //T1.6
+        //MANCA RELAZIONE TRA PARTECIPANTE E PIATTO PRESENTATO
+        int votoPiattoMax;
+        int votoPiatto;
+        String idPartecipValutazioneAlta;
+        votoPiatto = 0;
+        votoPiattoMax = 0;
+        for(Partecipante partecipante : partecipanteList){
+            votoPiatto = partecipante.getPiattiPresentati().getvotiPiattopresentato...........
+            if(votoPiatto > votoPiattoMax){
+                idPartecipValutazioneAlta = partecipante.getId();
+            }
+        }
+
+        System.out.println(idPartecipValutazioneAlta);
+
+
+        //T1.7
+        int VotoMinoreGusto;
+        VotoMinoreGusto = 9999;
+        for(Piatto piatto : piattoList){
+            if (piatto.getTipologia().equals("PESCE")){
+
+                if (piatto.getGusto() < VotoMinoreGusto)
+                    VotoMinoreGusto = piatto.getGusto();
+            }
+        }
+
+        System.out.println(VotoMinoreGusto);
+        }
+
+         //T2
+    //MANCANO RELAZIONI TRA PARTECIPANTI E PIATTI PRESENTATI
+            Scanner t2 = new Scanner(System.in);
+            int p = t2.nextInt();
+            int q = t2.nextInt();
+            int punteggioMedio = 0;
+            boolean flag1, flag2, flag3;
+            ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||RIVED
+        for(Piatto piatto : piattoList){
+            punteggioMedio = piatto.getAspetto() + piatto.getGusto() + piatto.getConsistenza();
+            if((punteggioMedio > p) && (punteggioMedio < q)){
+               flag1 = true;
+            }
+                else flag1 = false;
+        }
+
+
+        for(Partecipante partecipante : partecipanteList){
+            if(partecipante.getTecnica() < p || partecipante.getCreativita() < p) {
+                flag2 = true;
+            }else flag2 = false;
+
     }
+        for(Piatto piatto : piattoList){
+        if(piatto.getPartecipanti() != piatto.getPartecipanti())
+            flag3 = true:
+        else flag 3 = false;
+    }
+
+
+
+
+
+
+
+
+
+        // calcolo bonus per il T2.4
+        int nTotaleBonus;
+    nTotaleBonus = 0;
+        for (Partecipante partecipante : partecipanteList) {
+        if ((partecipante.getPiattiPresentati(). || piatto.getTipologia().equals("CARNE") || piatto.getTipologia().equals("PESCE")) && piatto.getChefgoloso ){
+            nTotaleBonus++;
+        }
+        if (((piatto.getPortata().equals("SECONDO")  && piatto.getTipologia().equals("VEGETARIANO") || piatto.getTipologia().equals("PESCE")) && piatto.getChefricercato ){
+            nTotaleBonus++;
+        }
+        if (((Partecipante.piatto.getPortata().equals("ANTIPASTO")  && piatto.getTipologia().equals("VEGETARIANO") || piatto.getTipologia().equals("PESCE")) && piatto.getChefricercato ){
+            nTotaleBonus++;
+        }
+        if (piatto.getPortata().equals("ANTIPASTO")  && piatto.getChefesteta ){
+            nTotaleBonus++;
+        }
+
+
+
+        System.out.println("YES");
+        else System.out.println("NO");
+
+
+
+        Scanner t3 = new Scanner(System.in);
+        String idFornito;
+        String isVincitore;
+        idFornito = String.valueOf(t3.nextInt());
+        int punteggioMaxComplessivo = 0;
+        for(Partecipante partecipante : partecipanteList) {
+
+            if ((partecipante.getCreativita() + partecipante.getTecnica()) > punteggioMaxComplessivo)
+                if (idFornito == partecipante.getId()){
+                    punteggioMaxComplessivo = partecipante.getCreativita() + partecipante.getTecnica();
+            isVincitore = "VALID";
+        } else isVincitore = "NOT VALID";
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        }
+
+
+
+
+
+
+
+
+
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
 

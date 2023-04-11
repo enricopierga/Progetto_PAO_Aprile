@@ -119,9 +119,11 @@ public class Chef {
      *
      * @return la lista di partecipanti associati all'Chef
      */
-    public List<Partecipante> getPartecipanti() {
+
+    /*public boolean getPartecipanti(String idChef) {
         return partecipanti;
-    }
+    }*/
+
 
     /**
      * Aggiunge un partecipante alla lista di partecipanti associati all'Chef.

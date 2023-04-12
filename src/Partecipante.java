@@ -11,6 +11,7 @@ public class Partecipante {
     private List<Piatto> piatti;
     private Chef chef;
 
+
     /**
      * Costruttore che crea un nuovo Partecipante con l'ID specificato.
      *

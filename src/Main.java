@@ -341,22 +341,60 @@ for(Partecipante o : partecipanteList)
         } else System.out.println("NO");
 
 
-            //TASK3
 
-            Scanner t3 = new Scanner(System.in);
+        //TASK3
+        //DA RIVEDERE
+
+        Scanner t3 = new Scanner(System.in);
             String idFornito;
             String isVincitore=null;
             idFornito = String.valueOf(t3.next());
             int punteggioMaxComplessivo = 0;
-            for (Partecipante c : partecipanteList) {
+            int nBonusMaggioreRicevuti = 0;
+            String salvaIdPiuBonus = null;
+            int controlloBonusOttenuti=0;
+            int bonusOttenuto=0;
 
-                if ((c.getCreativita() + c.getTecnica()) > punteggioMaxComplessivo)
-                    if (idFornito == c.getId()) {
+
+
+
+            //Calcolo e verifico: Partecipante che ha ottenuto più bonus
+            // Partecipante con punteggio Max Complessivo
+            //Controllo che ID Fornito corrispond a quello cercato
+
+
+        for (Partecipante c : partecipanteList) {
+
+                for(Piatto piatto : piattoList) {
+                    if ((piatto.getPortata().equals(Portata.DOLCE) || piatto.getTipologia().equals(Tipologia.CARNE) || piatto.getTipologia().equals(Tipologia.PESCE)) && c.getChef().isGoloso()) {
+                        bonusOttenuto++;
+                    }
+                    if ((piatto.getPortata().equals(Portata.SECONDO) && piatto.getTipologia().equals(Tipologia.VEGETARIANO) || piatto.getTipologia().equals(Tipologia.PESCE)) && c.getChef().isRicercato()) {
+                        bonusOttenuto++;
+                    }
+                    if (piatto.getPortata().equals("ANTIPASTO") && c.getChef().isEsteta()) {
+                        bonusOttenuto++;
+                    }
+
+                }
+
+                if (c.getCreativita() + c.getTecnica() > punteggioMaxComplessivo){
+                    if (bonusOttenuto >= controlloBonusOttenuti){
                         punteggioMaxComplessivo = c.getCreativita() + c.getTecnica();
-                        isVincitore = "VALID";
-                    } else isVincitore = "NOT VALID";
-            }
-            System.out.println(isVincitore);
+                        salvaIdPiuBonus = c.getId();
+                    }
+
+                }
+
+                if (idFornito == salvaIdPiuBonus) {
+                    isVincitore = "VALID";
+                } else isVincitore = "NOT VALID";
+               }
+                System.out.println(isVincitore);
+
+
+
+
         }
 
 

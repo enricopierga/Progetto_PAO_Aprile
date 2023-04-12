@@ -120,9 +120,9 @@ public class Chef {
      * @return la lista di partecipanti associati all'Chef
      */
 
-    /*public boolean getPartecipanti(String idChef) {
+    public List<Partecipante> getPartecipanti(String idChef) {
         return partecipanti;
-    }*/
+    }
 
 
     /**

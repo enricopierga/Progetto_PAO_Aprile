@@ -9,6 +9,8 @@ public class Parser {
     public static List<Piatto> piattoList = new ArrayList<Piatto>();
     private static int righeDaleggere;
 
+    public static String ultimaRiga;
+
 
 
     public static void Main (){
@@ -21,7 +23,7 @@ public class Parser {
         int numeroDiPartecipanti = sc.nextInt();
         sc.nextLine(); // consuma la fine linea
 
-        righeDaleggere = (numeroDiChef + numeroDiPartecipanti + numeroDiPiatti) + 1;
+
 
 
         // Crea la lista di chef
@@ -43,6 +45,7 @@ public class Parser {
             piatto.setTipologia(Tipologia.valueOf(piattoData[5].toUpperCase()));
             piattoList.add(piatto);
         }
+
 
         // Crea la lista di partecipanti
         for (int i = 0; i < numeroDiPartecipanti; i++) {
@@ -74,11 +77,14 @@ public class Parser {
 
             partecipanteList.add(partecipante);
         }
+
+        ultimaRiga = sc.nextLine();
+        System.out.println(ultimaRiga);
+
+
     }
 
-        public int getRighe(){
-        return righeDaleggere;
-    }
+
 
         public List<Chef> getChefList() {
             return chefList;
@@ -94,7 +100,10 @@ public class Parser {
     }
 
 
+        public String getUltimaRiga(){
 
+        return ultimaRiga;
+        }
 
 
 

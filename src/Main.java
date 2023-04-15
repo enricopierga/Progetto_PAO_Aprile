@@ -14,6 +14,8 @@ public class Main {
         List<Partecipante> partecipanteList = Parser.getPartecipanteList();
         List<Piatto> piattoList = Parser.getPiattoList();
 
+        String ultimaRiga = Parser.getUltimaRiga();
+
 
 //TASK
 
@@ -154,7 +156,6 @@ public class Main {
                     }
                 }
             }
-            System.out.println(idPartecipValutazioneAlta);
 
 
             //T1.7
@@ -173,17 +174,6 @@ public class Main {
                 }
 
             }
-            System.out.println(idPiattoMinorePesce);
-
-
-
-
-
-
-
-
-
-
 
 
             //TASK2
@@ -267,18 +257,21 @@ public class Main {
             if (flag1 && flag3 && flag3 && flag4) {
                 resultTask2 = "YES";
             } else resultTask2 = "NO";
-
-            String linea = null;
-            Scanner a = new Scanner(System.in);
-            linea = a.nextLine();
-
-            if (linea.endsWith("TASK1")) {
+        }
+    }
+}
 
 
+public void stampe tasks() {
+
+                if (ultimaRiga == "TASK1") {
                 System.out.println("\n" + idChefPiuAssegnato);
                 System.out.println(idpartecipminore);
                 System.out.println(carFrequente);
                 System.out.println(nPiattiGolosi);
+
+                System.out.println(idPartecipValutazioneAlta);
+                System.out.println(idPiattoMinorePesce);
             }
 
 

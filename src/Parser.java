@@ -4,49 +4,44 @@ import java.util.Scanner;
 
 public class Parser {
 
-    public static List<Chef> chefList = new ArrayList<Chef>();
-    public static List<Partecipante> partecipanteList = new ArrayList<Partecipante>();
-    public static List<Piatto> piattoList = new ArrayList<Piatto>();
-    private static int righeDaleggere;
+    public List<Chef> chefList = new ArrayList<Chef>();
+    public List<Partecipante> partecipanteList = new ArrayList<Partecipante>();
+    public List<Piatto> piattoList = new ArrayList<Piatto>();
+    private Scanner sc;
 
-    public static String ultimaRiga;
+    public String ultimaRiga;
 
-
-
-    public static void Main (){
-
-
-        Scanner sc = new Scanner(System.in);
+    public void Parse() {
+        sc = new Scanner(System.in);
         // Leggi il numero di chef, piatti e partecipanti
         int numeroDiChef = sc.nextInt();
         int numeroDiPiatti = sc.nextInt();
         int numeroDiPartecipanti = sc.nextInt();
         sc.nextLine(); // consuma la fine linea
 
+        parseChef(sc, numeroDiChef);
+        parsePiatti(sc, numeroDiPiatti);
+        parsePartecipanti(sc, numeroDiPartecipanti);
+    }
 
+    public List<Chef> getChefList() {
+        return chefList;
+    }
 
+    public List<Partecipante> getPartecipanteList() {
+        return partecipanteList;
+    }
 
-        // Crea la lista di chef
-        for (int i = 0; i < numeroDiChef; i++) {
-            String[] chefData = sc.nextLine().split(" ");
-            Chef chef = new Chef(chefData[0], Integer.parseInt(chefData[1]), Integer.parseInt(chefData[2]), Integer.parseInt(chefData[3]));
-            chefList.add(chef);
-        }
+    public List<Piatto> getPiattoList() {
+        return piattoList;
+    }
 
-        // Crea la lista di piatti
+    public String getUltimaRiga() {
 
-        for (int i = 0; i < numeroDiPiatti; i++) {
-            String[] piattoData = sc.nextLine().split(" ");
-            Piatto piatto = new Piatto(piattoData[0]);
-            piatto.setAspetto(Integer.parseInt(piattoData[1]));
-            piatto.setConsistenza(Integer.parseInt(piattoData[2]));
-            piatto.setGusto(Integer.parseInt(piattoData[3]));
-            piatto.setPortata(Portata.valueOf(piattoData[4].toUpperCase()));
-            piatto.setTipologia(Tipologia.valueOf(piattoData[5].toUpperCase()));
-            piattoList.add(piatto);
-        }
+        return sc.nextLine();
+    }
 
-
+    private void parsePartecipanti(Scanner sc, int numeroDiPartecipanti) {
         // Crea la lista di partecipanti
         for (int i = 0; i < numeroDiPartecipanti; i++) {
             String[] partecipanteData = sc.nextLine().split(" ");
@@ -77,39 +72,28 @@ public class Parser {
 
             partecipanteList.add(partecipante);
         }
-
-
-        ultimaRiga = sc.nextLine();
-
-
-
     }
 
-
-
-        public List<Chef> getChefList() {
-            return chefList;
+    private void parsePiatti(Scanner sc, int numeroDiPiatti) {
+        // Crea la lista di piatti
+        for (int i = 0; i < numeroDiPiatti; i++) {
+            String[] piattoData = sc.nextLine().split(" ");
+            Piatto piatto = new Piatto(piattoData[0]);
+            piatto.setAspetto(Integer.parseInt(piattoData[1]));
+            piatto.setConsistenza(Integer.parseInt(piattoData[2]));
+            piatto.setGusto(Integer.parseInt(piattoData[3]));
+            piatto.setPortata(Portata.valueOf(piattoData[4].toUpperCase()));
+            piatto.setTipologia(Tipologia.valueOf(piattoData[5].toUpperCase()));
+            piattoList.add(piatto);
         }
-
-        public List<Partecipante> getPartecipanteList() {
-            return partecipanteList;
-        }
-
-
-        public List<Piatto> getPiattoList() {
-        return piattoList;
     }
 
-
-        public String getUltimaRiga(){
-
-        return ultimaRiga;
+    private void parseChef(Scanner sc, int numeroDiChef) {
+        // Crea la lista di chef
+        for (int i = 0; i < numeroDiChef; i++) {
+            String[] chefData = sc.nextLine().split(" ");
+            Chef chef = new Chef(chefData[0], Integer.parseInt(chefData[1]), Integer.parseInt(chefData[2]), Integer.parseInt(chefData[3]));
+            chefList.add(chef);
         }
-
-
-
-
-
-
-
+    }
 }

@@ -14,9 +14,6 @@ public class Main {
             List<Piatto> piattoList = parser.getPiattoList();
 
             ultimaRiga = parser.getUltimaRiga();
-            System.out.println("-------------");
-            System.out.println(ultimaRiga);
-            System.out.println("-------------");
 
             if (ultimaRiga.startsWith("TASK1")) {
                 eseguiTask1(ultimaRiga, chefList, partecipanteList, piattoList);
@@ -50,30 +47,30 @@ public class Main {
 
         //T2.2
         boolean flag2 = true;
-        for (Partecipante pluto : partecipanteList) {
-            if (pluto.getTecnica() < p && pluto.getCreativita() < p) {
+        for (Partecipante partecipante : partecipanteList) {
+            if (partecipante.getTecnica() < p && partecipante.getCreativita() < p) {
                 flag2 = false;
+                break;
             }
         }
 
         //T2.3 controllo se un piatto viene presentato da max 2 partecipanti
-        boolean flag3 = true;
+        boolean flag3;
         String idControllo = null;
-        String perControllare = null;
+        String perControllare;
         int numControllo = 0;
 
         for (Partecipante o : partecipanteList)
+        {
             for (Piatto pi : o.getPiattiPresentati()) {
-                perControllare = o.getId();
+                perControllare = pi.getId();
                 if (!perControllare.equals(idControllo)) {
-                    idControllo = o.getId();
-                    flag3 = true;
+                    idControllo = pi.getId();
                 } else numControllo++;
             }
-        if (numControllo < 2) {
-            flag3 = true;
-        } else flag3 = false;
+        }
 
+        flag3 = numControllo < 2;
 
         // T2.4 controllo se ogni partecipante presenta un piatto da bonus
         boolean flag4 = false;
@@ -81,22 +78,18 @@ public class Main {
 
         for (int i = 0; i < partecipanteList.size(); i++) {
             Partecipante pippo = partecipanteList.get(i);
-            for (Piatto piatto: pippo.getPiatti()) {
+            for (Piatto piatto : pippo.getPiatti()) {
                 if ((piatto.getPortata().equals(Portata.DOLCE) || piatto.getTipologia().equals(Tipologia.CARNE) || piatto.getTipologia().equals(Tipologia.PESCE)) && pippo.getChef().isGoloso()) {
                     flagBonusPartecip[i] = true;
                     break;
                 } else if ((piatto.getPortata().equals(Portata.SECONDO) && piatto.getTipologia().equals(Tipologia.VEGETARIANO) || piatto.getTipologia().equals(Tipologia.PESCE)) && pippo.getChef().isRicercato()) {
                     flagBonusPartecip[i] = true;
                     break;
-                } else if (piatto.getPortata().equals("ANTIPASTO") && pippo.getChef().isEsteta()) {
+                } else if (piatto.getPortata().equals(Portata.ANTIPASTO) && pippo.getChef().isEsteta()) {
                     flagBonusPartecip[i] = true;
                     break;
                 }
             }
-        }
-
-        for (Partecipante pippo : partecipanteList) {
-
         }
 
         for (int i = 0; i < flagBonusPartecip.length; i++) {
@@ -140,7 +133,7 @@ public class Main {
         //T1.2 trovare id partecipante con livello di ingresso minore
         String idpartecipminore = new String();
         int min_punteggio = 99999;
-        int punteggio = 0;
+        int punteggio;
         for (Partecipante partecipante : partecipanteList) {
             punteggio = partecipante.getTecnica() + partecipante.getCreativita();
             if (punteggio < min_punteggio) {
@@ -182,21 +175,17 @@ public class Main {
         int nPiattiGolosi = 0;
 
         for (Piatto piatto : piattoList) {
-
             if (piatto.getPortata().equals(Portata.DOLCE) || piatto.getTipologia().equals(Tipologia.CARNE) || piatto.getTipologia().equals(Tipologia.PESCE)) {
                 nPiattiGolosi++;
-
             }
         }
+
         if (ultimaRiga.equals("TASK1")) {
             System.out.println(nPiattiGolosi);
         }
 
-
         //T1.5 Numero totale di Bonus
         // Calcolo dei bonus aggiuntivi in base alle caratteristiche dello chef giudice
-
-
         for (Partecipante partecipante : partecipanteList) {
             int[][] contaBonus = new int[piattoList.toArray().length][3];
 
@@ -204,34 +193,24 @@ public class Main {
                 int i = 0;
                 for (Piatto pia : partecipante.getPiattiPresentati()) {
 
-
                     if (pia.getPortata().equals(Portata.DOLCE) && chef.isGoloso()) {
                         contaBonus[i][0] = 1;
-
                     }
                     if ((pia.getTipologia().equals(Tipologia.CARNE) || pia.getTipologia().equals(Tipologia.PESCE)) && chef.isGoloso()) {
                         contaBonus[i][0] = 1;
-
-
                     }
                     if (pia.getPortata().equals(Portata.SECONDO) && (pia.getTipologia().equals(Tipologia.VEGETARIANO) || pia.getTipologia().equals(Tipologia.PESCE)) && chef.isRicercato()) {
                         contaBonus[i][1] = 1;
-
                     }
                     if (pia.getPortata().equals(Portata.ANTIPASTO) && (pia.getTipologia().equals(Tipologia.VEGETARIANO) || pia.getTipologia().equals(Tipologia.PESCE)) && chef.isRicercato()) {
                         contaBonus[i][1] = 1;
-
-
                     }
 
                     if (pia.getPortata().equals(Portata.ANTIPASTO) && chef.isEsteta()) {
                         contaBonus[i][2] = 1;
-
                     }
                     i++;
                 }
-
-
             }
 
 
@@ -242,20 +221,17 @@ public class Main {
                     for (int p = 0; p < piattoList.toArray().length; p++) {
                         nTotaleBonus = nTotaleBonus + contaBonus[p][c];
                     }
-
                 }
             }
             System.out.printf(nTotaleBonus + " ");
 
         }
-        System.out.printf(" \n");
-
+        System.out.print(" \n");
 
         //T1.6 ID partecipante con piatto di valutazione complessiva più alto
         int votoPiattoMax = 0;
         int votoPiatto = 0;
         String idPartecipValutazioneAlta = null;
-        votoPiatto = 0;
         votoPiattoMax = 0;
 
         for (Partecipante a : partecipanteList) {
@@ -273,7 +249,6 @@ public class Main {
             System.out.println(idPartecipValutazioneAlta);
         }
 
-
         //T1.7
         int VotoMinoreGusto;
         String idPiattoMinorePesce = null;
@@ -288,8 +263,8 @@ public class Main {
                     idPiattoMinorePesce = piatto.getId();
                 }
             }
-
         }
+
         if (ultimaRiga.equals("TASK1")) {
             System.out.println(idPiattoMinorePesce);
         }

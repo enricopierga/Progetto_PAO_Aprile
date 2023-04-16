@@ -78,8 +78,9 @@ public class Parser {
             partecipanteList.add(partecipante);
         }
 
+
         ultimaRiga = sc.nextLine();
-        System.out.println(ultimaRiga);
+
 
 
     }

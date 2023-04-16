@@ -36,13 +36,13 @@ public class Main {
         //T2.1
         int nPiattiMinoriP = 0;
         for (Piatto piatto : piattoList) {
-
             punteggioMedio = (piatto.getAspetto() + piatto.getGusto() + piatto.getConsistenza()) / 3;
             if ((punteggioMedio < p)) {
                 nPiattiMinoriP++;
 
             }
         }
+
         boolean flag1 = nPiattiMinoriP <= q;
 
         //T2.2
@@ -108,7 +108,7 @@ public class Main {
         } else resultTask2 = "NO";
 
         if (ultimaRiga.equals(controlloTask2)) {
-            System.out.println("\n" + resultTask2);
+            System.out.println(resultTask2);
         }
     }
 
